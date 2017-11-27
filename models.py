@@ -12,10 +12,11 @@ class Net(nn.Module):
         self.fc4 = nn.Linear(512, 27)
 
     def forward(self, x):
-        x = self.fc0(x)
-        x = self.fc1(x)
-        x = self.fc2(x)
-        x = self.fc3(x)
-        x = self.fc4(x.view(x.size(0), -1))
-  #      import ipdb;ipdb.set_trace()
+        x = F.relu(self.fc0(x))
+        x = F.relu(self.fc1(x))
+        x = F.relu(self.fc2(x))
+        x = F.relu(self.fc3(x))
+        x = F.relu(self.fc4(x.view(x.size(0), -1)))
+#        print(x.size())
+ #       import ipdb;ipdb.set_trace()
         return F.log_softmax(x)
